@@ -13,9 +13,8 @@ class PolylineSpider(scrapy.Spider):
     keywords = ''
 
     # 需要跑的tag和keywords 可以单独设置
-    tags = ['060100', '060101', '060102', '060103']
-    # , '060200', '060201', '060202', '060400', '060401', '060402',
-    # '060403', '060404', '060405', '060406', '060407', '060408', '060409', '060411', '060413', '060414', '060415'
+    tags = ['060100', '060101', '060102', '060103', '060200', '060201', '060202', '060400', '060401', '060402',
+    '060403', '060404', '060405', '060406', '060407', '060408', '060409', '060411', '060413', '060414', '060415', '061400', '061401']
     # tags = [
     #     '050000', '050100', '050101', '050102', '050103', '050104', '050105', '050106', '050107', '050108', '050109',
     #     '050110', '050111', '050112', '050113', '050114', '050115', '050116', '050117', '050118', '050119', '050120',
@@ -38,7 +37,7 @@ class PolylineSpider(scrapy.Spider):
 
         for each in provinces:  # 所有省份
             name = each['name']
-            if name == '四川省':  # 可以单独跑一个省份
+            if name == '湖北省':  # 可以单独跑一个省份
                 url = url_para1 + self.key + url_para2 + name + url_para3
                 yield scrapy.Request(url=url, callback=self.parse_city)
 
@@ -49,7 +48,7 @@ class PolylineSpider(scrapy.Spider):
         data = json.loads(response.body.decode('utf-8'))
         cities = data['districts'][0]['districts']
         for city in cities:
-            if city['name'] == '成都市':
+            if city['name'] == '武汉市':
                 url = url_para1 + self.key + url_para2 + city['name']
                 yield scrapy.Request(url=url, callback=self.parse_ad)
 

@@ -6,8 +6,8 @@ import random
 proxyServer = "http://proxy.abuyun.com:9010"
 
 # 代理隧道验证信息
-proxyUser = "H0O546J262JY138P"
-proxyPass = "361EC9C54AD88637"
+proxyUser = "HBF33534VC54188D"
+proxyPass = "35DDD740DAD5E118"
 proxyString = proxyUser + ":" + proxyPass
 proxyAuth = "Basic " + (base64.b64encode(proxyString.encode('utf-8'))).decode('utf-8')
 

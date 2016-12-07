@@ -27,3 +27,18 @@ class GaoDeItem(Item):
     distance = Field()
     photo_urls = Field()
     photo_exists = Field()
+
+class ChinaItem(Item):
+    pro_name = Field()
+    city_name = Field()
+    city_native = Field()
+    city_status = Field()
+    city_population = Field()
+    district_name = Field()
+    district_native = Field()
+    district_status = Field()
+    district_population = Field()
+    township_name = Field()
+    township_native = Field()
+    township_status = Field()
+    township_population = Field()
