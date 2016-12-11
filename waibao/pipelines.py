@@ -14,7 +14,7 @@ class GaoDePipeline(object):
                 try:
                     conn = pymysql.connect(host='localhost', user='root', passwd='067116', db='gaode', charset='utf8')
                     cur = conn.cursor()
-                    sql = 'insert into huanggang(uid,`name`,address,tag,sub_tag,center,tel,pro_name,pro_center,city_name,' \
+                    sql = 'insert into changde(uid,`name`,address,tag,sub_tag,center,tel,pro_name,pro_center,city_name,' \
                           'city_center,ad_name,ad_center,distance,photo_urls,photo_exists) ' \
                           'values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'
 
