@@ -13,7 +13,7 @@ BOT_NAME = 'waibao'
 
 SPIDER_MODULES = ['waibao.spiders']
 NEWSPIDER_MODULE = 'waibao.spiders'
-JOBDIR = "queue/polyline"
+# JOBDIR = "queue/polyline"
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 ' \
@@ -21,7 +21,7 @@ USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 ' \
 
 # Obey robots.txt rules
 # ROBOTSTXT_OBEY = True
-LOG_LEVEL = 'INFO'
+# LOG_LEVEL = 'INFO'
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32

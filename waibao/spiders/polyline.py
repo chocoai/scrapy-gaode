@@ -61,6 +61,7 @@ class PolylineSpider(scrapy.Spider):
         if len(ads):
             for ad in ads:
                 url = url_para1 + self.key + url_para2 + ad['name']
+                print(url)
                 yield scrapy.Request(url=url, callback=self.parse_points)
         else:
             url = response.url + "&test=2"
@@ -86,7 +87,7 @@ class PolylineSpider(scrapy.Spider):
             if point_y <= min_point_y:
                 min_point_y = point_y
 
-        pace_step = 10.0
+        pace_step = 15.0
         if "test" in response.url:
             pace_step = 40.0
 
@@ -117,7 +118,7 @@ class PolylineSpider(scrapy.Spider):
                     url = page_url + str(1)  # 从第一页开始跑
                     response.meta['page_url'] = page_url  # 记录page_url和当前的page
                     response.meta['page'] = 1
-                    yield scrapy.Request(url=url, callback=self.parse_data, meta=response.meta)
+                    # yield scrapy.Request(url=url, callback=self.parse_data, meta=response.meta)
 
     def parse_data(self, response):
         data = json.loads(response.body.decode('utf-8'))

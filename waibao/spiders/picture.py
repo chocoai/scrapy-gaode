@@ -9,23 +9,23 @@ class PictureSpider(scrapy.Spider):
     allowed_domains = ["ditu.amap.com"]
     conn, cur = connDB()
     i = 0
-    database_name = "new_data"
+    database_name = "deyang_sp"
 
     def start_requests(self):
 
-        # sql = "select uid, photo_urls from %s where photo_exists = '1'" % self.database_name
-        sql = "select uid from %s where uid != ''" % self.database_name
+        sql = "select uid, photo_urls from %s where photo_exists = '1'" % self.database_name
+        # sql = "select uid from %s where uid != ''" % self.database_name
         self.cur.execute(sql)
         data = self.cur.fetchall()
 
         for each in data:
-            # picture_str = each[1]
-            # picture_list = picture_str.split(' ')
-            # if len(picture_list) >= 4:
-            uid = each[0]
-            url = "http://ditu.amap.com/detail/%s" % uid
-            # print(url)
-            yield self.make_requests_from_url(url)
+            picture_str = each[1]
+            picture_list = picture_str.split(' ')
+            if len(picture_list) == 4:
+                uid = each[0]
+                url = "http://ditu.amap.com/detail/%s" % uid
+                # print(url)
+                yield self.make_requests_from_url(url)
 
     def parse(self, response):
         self.i += 1
