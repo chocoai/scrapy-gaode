@@ -48,7 +48,7 @@ class PolylineSpider(scrapy.Spider):
         data = json.loads(response.body.decode('utf-8'))
         cities = data['districts'][0]['districts']
         for city in cities:
-            if city['name'] == '武汉市':
+            if city['name'] == '黄冈市':
                 url = url_para1 + self.key + url_para2 + city['name']
                 yield scrapy.Request(url=url, callback=self.parse_ad)
 
