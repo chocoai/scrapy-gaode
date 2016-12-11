@@ -118,7 +118,7 @@ class PolylineSpider(scrapy.Spider):
                     url = page_url + str(1)  # 从第一页开始跑
                     response.meta['page_url'] = page_url  # 记录page_url和当前的page
                     response.meta['page'] = 1
-                    # yield scrapy.Request(url=url, callback=self.parse_data, meta=response.meta)
+                    yield scrapy.Request(url=url, callback=self.parse_data, meta=response.meta)
 
     def parse_data(self, response):
         data = json.loads(response.body.decode('utf-8'))
