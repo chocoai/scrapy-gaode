@@ -37,7 +37,7 @@ class PolylineSpider(scrapy.Spider):
 
         for each in provinces:  # 所有省份
             name = each['name']
-            if name == '四川省':  # 可以单独跑一个省份
+            if name == '湖南省':  # 可以单独跑一个省份
                 url = url_para1 + self.key + url_para2 + name + url_para3
                 yield scrapy.Request(url=url, callback=self.parse_city)
 
@@ -48,7 +48,7 @@ class PolylineSpider(scrapy.Spider):
         data = json.loads(response.body.decode('utf-8'))
         cities = data['districts'][0]['districts']
         for city in cities:
-            if city['name'] == '成都市':
+            if city['name'] == '常德市':
                 url = url_para1 + self.key + url_para2 + city['name']
                 yield scrapy.Request(url=url, callback=self.parse_ad)
 
