@@ -3,7 +3,7 @@ import base64
 import random
 
 # 代理服务器
-proxyServer = "http://proxy.abuyun.com:9010"
+proxyServer = "http://proxy.abuyun.com:9020"
 
 # 代理隧道验证信息
 proxyUser = "HBF33534VC54188D"

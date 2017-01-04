@@ -10,12 +10,6 @@ class GaodeSpider(scrapy.Spider):
     allowed_domains = ["restapi.amap.com"]
     key = "604128e90f0f7ca695c811e7ccf5d6f0"
 
-    # 记录pro_center,city_center,ad_center,street_center 分类中的省市可能和实际不同
-    pro_center = {}
-    city_center = {}
-    ad_center = {}
-    street_center = {}
-
     # 需要跑的tag和keywords 可以单独设置
     tags = ['060200', '060201', '060202', '060400', '060401', '060402', '060403', '060404', '060405', '060406',
             '060407', '060408', '060409', '060411', '060413', '060414', '060415']

@@ -9,22 +9,24 @@ class PictureSpider(scrapy.Spider):
     allowed_domains = ["ditu.amap.com"]
     conn, cur = connDB()
     i = 0
-    database_name = "deyang_sp"
+    database_name = "update"
 
     def start_requests(self):
 
-        sql = "select uid, photo_urls from %s where photo_exists = '1'" % self.database_name
+        sql = "select uid, photo_urls from `%s`" % self.database_name
         # sql = "select uid from %s where uid != ''" % self.database_name
         self.cur.execute(sql)
         data = self.cur.fetchall()
 
         for each in data:
-            picture_str = each[1]
-            picture_list = picture_str.split(' ')
-            if len(picture_list) == 4:
-                uid = each[0]
+            # picture_str = each[1]
+            # picture_list = picture_str.split(' ')
+            #
+            # if len(picture_list) == 4:
+            uid = each[0]
+            if uid:
                 url = "http://ditu.amap.com/detail/%s" % uid
-                # print(url)
+                print(url)
                 yield self.make_requests_from_url(url)
 
     def parse(self, response):
@@ -40,7 +42,7 @@ class PictureSpider(scrapy.Spider):
             img_url = img_node.extract()
             photo_urls = photo_urls + ' ' + img_url
         # print(photo_urls)
-        sql = "update %s set photo_urls = '%s' where uid = '%s'" % (self.database_name, photo_urls, uid)
+        sql = "update `%s` set photo_urls = '%s' where uid = '%s'" % (self.database_name, photo_urls, uid)
         # print(sql)
         self.cur.execute(sql)
         self.conn.commit()

@@ -27,6 +27,7 @@ class GaoDeItem(Item):
     distance = Field()
     photo_urls = Field()
     photo_exists = Field()
+    distributor = Field()
 
 class ChinaItem(Item):
     pro_name = Field()
