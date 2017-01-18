@@ -13,11 +13,11 @@ class PolylineSpider(scrapy.Spider):
     keywords = ''
 
     # 需要跑的tag和keywords 可以单独设置
-    # tags = ['060100', '060101', '060102', '060103', '060200', '060201', '060202', '060400', '060401', '060402',
-    # '060403', '060404', '060405', '060406', '060407', '060408', '060409', '060411', '060413', '060414', '060415', '061400', '061401']
-    tags = ['061400', '061200', '060411', '060900', '060200', '061207', '060703', '061101', '061102', '061103', '170207', '060605', '061100',
-            '061209', '071100', '060101', '061203', '070000', '061401', '060400']
-
+    tags = ['060100', '060101', '060102', '060103', '060200', '060201', '060202', '060400', '060401', '060402',
+    '060403', '060404', '060405', '060406', '060407', '060408', '060409', '060411', '060413', '060414', '060415', '061400', '061401']
+    # tags = ['061400', '061200', '060411', '060900', '060200', '061207', '060703', '061101', '061102', '061103', '170207', '060605', '061100',
+    #         '061209', '071100', '060101', '061203', '070000', '061401', '060400']
+    # tags = ['061400', '061401', '060411']
     # tags = [
     #     '050000', '050100', '050101', '050102', '050103', '050104', '050105', '050106', '050107', '050108', '050109',
     #     '050110', '050111', '050112', '050113', '050114', '050115', '050116', '050117', '050118', '050119', '050120',
@@ -40,7 +40,7 @@ class PolylineSpider(scrapy.Spider):
 
         for each in provinces:  # 所有省份
             name = each['name']
-            if name == '湖北省':  # 可以单独跑一个省份
+            if name == '上海市':  # 可以单独跑一个省份
                 url = url_para1 + self.key + url_para2 + name + url_para3
                 yield scrapy.Request(url=url, callback=self.parse_city)
 
@@ -51,9 +51,9 @@ class PolylineSpider(scrapy.Spider):
         data = json.loads(response.body.decode('utf-8'))
         cities = data['districts'][0]['districts']
         for city in cities:
-            if city['name'] == '十堰市':
-                url = url_para1 + self.key + url_para2 + city['name']
-                yield scrapy.Request(url=url, callback=self.parse_ad)
+            print(city['name'])
+            url = url_para1 + self.key + url_para2 + city['name']
+            yield scrapy.Request(url=url, callback=self.parse_ad)
 
     def parse_ad(self, response):
         url_para1 = 'http://restapi.amap.com/v3/config/district?key='
@@ -65,10 +65,12 @@ class PolylineSpider(scrapy.Spider):
             for ad in ads:
                 url = url_para1 + self.key + url_para2 + ad['name']
                 # print(url)
+                # print(ad['name'])
                 # if ad['name'] == '通州区':
                 yield scrapy.Request(url=url, callback=self.parse_points)
         else:
             url = response.url + "&test=2"
+            print(url)
             yield scrapy.Request(url=url, callback=self.parse_points)
 
     def parse_points(self, response):
@@ -91,9 +93,9 @@ class PolylineSpider(scrapy.Spider):
             if point_y <= min_point_y:
                 min_point_y = point_y
 
-        pace_step = 15.0
+        pace_step = 10.0
         if "test" in response.url:
-            pace_step = 40.0
+            pace_step = 20.0
 
         pace_x = (max_point_x - min_point_x) / pace_step
         pace_y = (max_point_y - min_point_y) / pace_step

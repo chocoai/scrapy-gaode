@@ -9,7 +9,7 @@ class PictureSpider(scrapy.Spider):
     allowed_domains = ["ditu.amap.com"]
     conn, cur = connDB()
     i = 0
-    database_name = "update"
+    database_name = "hubei1"
 
     def start_requests(self):
 
@@ -19,15 +19,16 @@ class PictureSpider(scrapy.Spider):
         data = self.cur.fetchall()
 
         for each in data:
-            # picture_str = each[1]
-            # picture_list = picture_str.split(' ')
+            picture_str = each[1]
+            picture_list = picture_str.split(' ')
+            # print(picture_list, len(picture_list))
             #
-            # if len(picture_list) == 4:
-            uid = each[0]
-            if uid:
-                url = "http://ditu.amap.com/detail/%s" % uid
-                print(url)
-                yield self.make_requests_from_url(url)
+            if len(picture_list) == 4:
+                uid = each[0]
+                if uid:
+                    url = "http://ditu.amap.com/detail/%s" % uid
+                    # print(url)
+                    yield self.make_requests_from_url(url)
 
     def parse(self, response):
         self.i += 1
